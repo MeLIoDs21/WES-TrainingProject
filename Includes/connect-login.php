@@ -22,7 +22,7 @@
 
 	if($row["password"] == $password){
 		session_start();
-		$_SESSION['Username']= $username;
+		$_SESSION['username']= $username;
 		header("Location: admin.php");
 	} else { echo "Fail"; }
 
