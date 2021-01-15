@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
--- Värd: 127.0.0.1
--- Tid vid skapande: 29 sep 2020 kl 14:37
--- Serverversion: 10.4.6-MariaDB
--- PHP-version: 7.3.8
+-- Host: 127.0.0.1
+-- Generation Time: Jan 15, 2021 at 10:32 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,35 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Databas: `webbshop`
+-- Database: `webbshop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `användare`
---
-
-CREATE TABLE `användare` (
-  `Username` varchar(20) COLLATE utf16_swedish_ci NOT NULL,
-  `email` varchar(150) COLLATE utf16_swedish_ci NOT NULL,
-  `password` varchar(255) COLLATE utf16_swedish_ci NOT NULL,
-  `status` tinyint(2) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_swedish_ci;
-
---
--- Dumpning av Data i tabell `användare`
---
-
-INSERT INTO `användare` (`Username`, `email`, `password`, `status`) VALUES
-('Kalle', 'kalle@vaxjo.se', 'sal123', 0),
-('SuperSexy', 'Super@sexy.com', 'Sexyguy', 1),
-('Wtf', 'lul@lol.hub', 'Getrekt', 1);
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur `customers`
+-- Table structure for table `customers`
 --
 
 CREATE TABLE `customers` (
@@ -62,7 +39,7 @@ CREATE TABLE `customers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_swedish_ci;
 
 --
--- Dumpning av Data i tabell `customers`
+-- Dumping data for table `customers`
 --
 
 INSERT INTO `customers` (`customerID`, `username`, `firstname`, `lastname`, `adress`, `postnr`, `postadress`, `phone`) VALUES
@@ -73,7 +50,31 @@ INSERT INTO `customers` (`customerID`, `username`, `firstname`, `lastname`, `adr
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `orders`
+-- Table structure for table `members`
+--
+
+CREATE TABLE `members` (
+  `Username` varchar(20) COLLATE utf16_swedish_ci NOT NULL,
+  `email` varchar(150) COLLATE utf16_swedish_ci NOT NULL,
+  `password` varchar(255) COLLATE utf16_swedish_ci NOT NULL,
+  `status` tinyint(2) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_swedish_ci;
+
+--
+-- Dumping data for table `members`
+--
+
+INSERT INTO `members` (`Username`, `email`, `password`, `status`) VALUES
+('afda', 'fwe', 'fdsa', 0),
+('ger', 'reg', 'rthy', 0),
+('Kalle', 'kalle@vaxjo.se', 'sal123', 0),
+('SuperSexy', 'Super@sexy.com', 'Sexyguy', 1),
+('Wtf', 'lul@lol.hub', 'Getrekt', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
@@ -84,7 +85,7 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_swedish_ci;
 
 --
--- Dumpning av Data i tabell `orders`
+-- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`orderID`, `produktID`, `amount`, `customerID`) VALUES
@@ -95,7 +96,7 @@ INSERT INTO `orders` (`orderID`, `produktID`, `amount`, `customerID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `produkt`
+-- Table structure for table `produkt`
 --
 
 CREATE TABLE `produkt` (
@@ -107,36 +108,37 @@ CREATE TABLE `produkt` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_swedish_ci;
 
 --
--- Dumpning av Data i tabell `produkt`
+-- Dumping data for table `produkt`
 --
 
 INSERT INTO `produkt` (`produktID`, `username`, `description`, `prise`, `picture`) VALUES
-(1, 'Äpple', 'Fin', 11, '/Img/apple.jpg'),
-(2, 'Sexymovie', 'Very Sexy', 999, '/Img/Hot.jpg'),
-(4, 'Thotslayer', 'Slays any thot on sight', 99999999, '/Img/Thotslayer.jpg');
+(1, 'Apple', 'An apple', 11, 'Img/apple.jpg'),
+(2, 'Sexymovie', 'Wierd AF', 999, 'Img/SexyMovie.jpg'),
+(4, 'Thotslayer', 'Slays any thot on sight', 99999999, 'Img/ThotSlayer.jpg'),
+(5, 'Banana', 'Yellow', 30, 'Img/banana.jpg');
 
 --
--- Index för dumpade tabeller
+-- Indexes for dumped tables
 --
 
 --
--- Index för tabell `användare`
---
-ALTER TABLE `användare`
-  ADD PRIMARY KEY (`Username`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `Username` (`Username`),
-  ADD KEY `password` (`password`);
-
---
--- Index för tabell `customers`
+-- Indexes for table `customers`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`customerID`),
   ADD KEY `username` (`username`);
 
 --
--- Index för tabell `orders`
+-- Indexes for table `members`
+--
+ALTER TABLE `members`
+  ADD PRIMARY KEY (`Username`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `Username` (`Username`),
+  ADD KEY `password` (`password`);
+
+--
+-- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`orderID`),
@@ -144,45 +146,45 @@ ALTER TABLE `orders`
   ADD KEY `customerID` (`customerID`);
 
 --
--- Index för tabell `produkt`
+-- Indexes for table `produkt`
 --
 ALTER TABLE `produkt`
   ADD PRIMARY KEY (`produktID`);
 
 --
--- AUTO_INCREMENT för dumpade tabeller
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT för tabell `customers`
+-- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
   MODIFY `customerID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT för tabell `orders`
+-- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `orderID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT för tabell `produkt`
+-- AUTO_INCREMENT for table `produkt`
 --
 ALTER TABLE `produkt`
-  MODIFY `produktID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `produktID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- Restriktioner för dumpade tabeller
+-- Constraints for dumped tables
 --
 
 --
--- Restriktioner för tabell `customers`
+-- Constraints for table `customers`
 --
 ALTER TABLE `customers`
-  ADD CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`username`) REFERENCES `användare` (`Username`);
+  ADD CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`username`) REFERENCES `members` (`Username`);
 
 --
--- Restriktioner för tabell `orders`
+-- Constraints for table `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`produktID`) REFERENCES `produkt` (`produktID`) ON UPDATE CASCADE,
