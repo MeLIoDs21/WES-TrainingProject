@@ -23,9 +23,9 @@
 	if($row["password"] == $password){
 		session_start();
 		$_SESSION['username']= $username;
-		header("Location: admin.php");
+		require "../html/admin.php";
 	} else { echo "Fail"; }
-
+	
 
 
 
